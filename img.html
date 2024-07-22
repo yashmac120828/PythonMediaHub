@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<style>
+body{
+    background: url({{url_for("static",filename="imgback.jpeg")}});
+    background-size:cover;
+    margin:0px;
+    padding:0px;
+    height:100px;
+    width: 500px;
+}
+.block{
+    background: transparent;
+    backdrop-filter: blur(50px);
+    border: 2px solid rgb(248, 248, 248);
+    border-radius: 20px;
+    height:600px;
+    width: 500px;
+    margin:200px 500px 200px 500px;
+}
+h1{
+    color:black;
+    margin-left: 30px;
+    margin-top:20px;
+}
+.in{
+    height: 100%;
+    width:100%;
+    font-size: large;
+}
+label{
+    height: 100%;
+    width:100%;
+    font-size: large;
+}
+
+.sub{
+    margin:100px 120px 100px 120px;
+    height: 100%;
+    width:50%;
+    border: 2px solid white;
+    border-radius: 20px;
+    font-size:large;
+    background-blend-mode: screen;
+    background:transparent;
+
+}
+
+</style>
+    <div class="block">
+        <h1> IMAGE Upload And Download</h1>
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <label for="'file"> Choose a file</label>
+            <input type="file" name="file" id="'file" required class="in">
+            <br>
+            <input type="submit" value="UPLOAD" class="sub">
+        </form>
+        <h2>Uploaded Files</h2>
+        {% for filename in filenames %}
+            <span>{{ filename }}</span>
+            <a href="{{url_for('download_file',filename=filename)}}">Download
+            <button>Download</button>
+            </a>
+        {% endfor %}
+    </div>
+</body>
+</html>
